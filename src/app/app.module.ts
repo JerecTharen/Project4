@@ -13,15 +13,19 @@ import {
 } from "@angular/material";
 import { ScorecardComponent } from './scorecard/scorecard.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientModule} from "@angular/common/http";
+import { StartComponent } from './start/start.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ScorecardComponent
+    ScorecardComponent,
+    StartComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
