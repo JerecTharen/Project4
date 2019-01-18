@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import {
   MatCardModule,
   MatFormFieldModule,
-  MatIconModule,
+  MatIconModule, MatInputModule,
   MatOptionModule,
   MatSelectModule,
   MatTableModule,
@@ -22,7 +22,8 @@ import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
 import {AuthService} from "./auth/auth.service";
 import { SignUpComponent } from './auth/signup/signup.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AngularFireAuthModule} from "@angular/fire/auth";
 
 @NgModule({
   declarations: [
@@ -43,11 +44,14 @@ import {FormsModule} from "@angular/forms";
     MatSelectModule,
     MatOptionModule,
     MatTableModule,
+    MatInputModule,
     AppRoutingModule,
     RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireModule,
-    FormsModule
+    AngularFireAuthModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

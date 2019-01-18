@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/auth";
 import {Router} from "@angular/router";
+import {FormBuilder, Validators, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'JT-GFC-login',
@@ -12,7 +13,18 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(private angularAuth: AngularFireAuth, private router: Router) { }
+  loginForm: FormGroup;
+
+  constructor(
+    private angularAuth: AngularFireAuth,
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.loginForm = fb.group({
+      'email': [null, Validators.email],
+      'password': [null, Validators.minLength(4)]
+    })
+  }
 
   ngOnInit() {
   }
