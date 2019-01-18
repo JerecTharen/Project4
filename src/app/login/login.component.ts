@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
       .signInWithEmailAndPassword(this.email, this.password)
       .then(user => {
         if(user) {
-          this.router.navigate(['/scorecard']);
+          // console.log(user.user.uid);
+          this.router.navigate(['/course-select']);
         }
       });
   }

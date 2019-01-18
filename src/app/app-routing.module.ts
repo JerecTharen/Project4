@@ -9,8 +9,8 @@ import {SignUpComponent} from "./auth/signup/signup.component";
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'course-select', component: StartComponent},
-  {path: 'scorecard', component: ScorecardComponent},
   {path: 'signup', component: SignUpComponent},
+  {path: 'scorecard/:id', component: ScorecardComponent},
   {path: '', component: LoginComponent}
 ];
 

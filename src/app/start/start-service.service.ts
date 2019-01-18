@@ -8,9 +8,16 @@ import {Observable} from "rxjs";
 })
 export class StartServiceService {
   private coursesURL: string = 'https://golf-courses-api.herokuapp.com/courses';
+  private selectedCourse: string;
   constructor(private http: HttpClient) { }
   getCourses(): Observable<Course[]>{
-    console.log(this.http.get<Course[]>(this.coursesURL));
+    // console.log(this.http.get<Course[]>(this.coursesURL));
     return this.http.get<Course[]>(this.coursesURL);
+  }
+  updateCourse(course: string): void{
+    this.selectedCourse = course;
+  }
+  getCourse(): string{
+    return this.selectedCourse;
   }
 }

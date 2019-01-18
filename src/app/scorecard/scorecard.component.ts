@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ScoreAPIService} from "./score-api.service";
+import {StartServiceService} from "../start/start-service.service";
 
 const testData: any[] = [
   {hole: 1, names: ['jacob', 'jerec', 'aralin'], scores: [1,2,3]},
@@ -13,10 +15,22 @@ const testData: any[] = [
   styleUrls: ['./scorecard.component.scss']
 })
 export class ScorecardComponent implements OnInit {
-
-  constructor() { }
+  private courseInfo: any[];
+  constructor(
+    private scoreAPI: ScoreAPIService,
+    private startService: StartServiceService
+  ) { }
 
   ngOnInit() {
+    this.scoreAPI.updateCourseID(this.startService.getCourse());
+    this.getCourseInfo();
+  }
+
+  getCourseInfo(): void{
+    this.scoreAPI.getCourse().subscribe(info => {
+      this.courseInfo = info.data;
+      console.log(this.courseInfo);
+    });
   }
 
   DATASOURCE = testData;

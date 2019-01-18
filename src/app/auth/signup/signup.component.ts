@@ -22,7 +22,7 @@ export class SignUpComponent implements OnInit {
   ) {
     this.signUpForm = fb.group({
       'email': [null, Validators.email],
-      'password': [null, Validators.minLength(4)]
+      'password': [null, Validators.minLength(6)]
     })
   }
 
@@ -39,7 +39,7 @@ export class SignUpComponent implements OnInit {
       .createUserWithEmailAndPassword(this.email, this.password)
       .then(user => {
         if(user) {
-          this.router.navigate(['/scorecard']);
+          this.router.navigate(['/course-select']);
         }
       })
       .catch(error => console.log(error));
@@ -59,7 +59,7 @@ export class SignUpComponent implements OnInit {
     this.angularAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(user => {
       console.log(user);
       if(user) {
-        this.router.navigate(['/scorecard']);
+        this.router.navigate(['/course-select']);
       }
     })
   }

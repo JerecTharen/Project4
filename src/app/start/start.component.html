@@ -2,4 +2,18 @@
   <mat-card-title *ngFor="let course of courseList.courses">
     {{course.name}}
   </mat-card-title>
+  <mat-card-content>
+    <form>
+      <mat-form-field>
+        <mat-select placeholder="Choose a course" [(value)]="selectedCourse">
+          <mat-option  *ngFor="let course of courseList.courses" [value]="course.id">
+            {{course.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button (click)="submitCourse()">SUBMIT</button>
+      </div>
+    </form>
+  </mat-card-content>
 </mat-card>
