@@ -2,19 +2,75 @@
   <mat-card-title>
     SCORES
   </mat-card-title>
+  <div id="navigation">
+    <a routerLink="/course-select">Go back to course select</a>
+  </div>
   <mat-card-content>
     <div id="gitHubLink">
       <a target="_blank" href="https://github.com/JerecTharen/Project4"><i class="fab fa-github"></i>GitHub Repo</a>
     </div>
     <div id="handicap select">
       <form>
-        <mat-select placeholder="Choose a Tee Type">
-          <mat-option>Pro</mat-option>
-          <mat-option>Champion</mat-option>
-          <mat-option>Men</mat-option>
-          <mat-option>Woman</mat-option>
+        <mat-select placeholder="Choose a Tee Type" [(value)]="selectedTee">
+          <mat-option value="1" (click)="readyInfo(selectedTee)">Pro</mat-option>
+          <mat-option value="2" (click)="readyInfo(selectedTee)">Champion</mat-option>
+          <mat-option value="3" (click)="readyInfo(selectedTee)">Men</mat-option>
+          <mat-option value="4" (click)="readyInfo(selectedTee)">Woman</mat-option>
         </mat-select>
       </form>
     </div>
+    <button mat-raised-button (click)="sayTeeType()">Tee Type</button>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-title>Course Information</mat-card-title>
+  <mat-card-content>
+    <div id="courseInfoHere">
+      <div class="holeNumRow infoCol">
+        <div class="rowTitle">Hole Number</div>
+        <div class="holeNum">1</div>
+        <div class="holeNum">2</div>
+        <div class="holeNum">3</div>
+        <div class="holeNum">4</div>
+        <div class="holeNum">5</div>
+        <div class="holeNum">6</div>
+        <div class="holeNum">7</div>
+        <div class="holeNum">8</div>
+        <div class="holeNum">9</div>
+        <div class="holeNum">10</div>
+        <div class="holeNum">11</div>
+        <div class="holeNum">12</div>
+        <div class="holeNum">13</div>
+        <div class="holeNum">14</div>
+        <div class="holeNum">15</div>
+        <div class="holeNum">16</div>
+        <div class="holeNum">17</div>
+        <div class="holeNum">18</div>
+      </div>
+      <div class="infoCol holeYardage">
+        <div class="rowTitle">Hole Yardage</div>
+        <div class="holeYards" *ngFor="let yard of courseYardage">
+          {{ yard }}
+        </div>
+      </div>
+      <div class="infoCol holeHandicaps">
+        <div class="rowTitle">Hole Handicap</div>
+        <div class="holeHandi" *ngFor="let handi of courseHandicap">
+          {{ handi }}
+        </div>
+      </div>
+      <div class="infoCol holePARs">
+        <div class="rowTitle">Hole PAR</div>
+        <div class="holePAR" *ngFor="let par of coursePAR">
+          {{ par }}
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-title>Hole Scores</mat-card-title>
+  <mat-card-content>
+    
   </mat-card-content>
 </mat-card>

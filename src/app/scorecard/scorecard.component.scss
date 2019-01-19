@@ -3,9 +3,22 @@
   flex-direction: column;
   width: 25%;
 }
-#gitHubLink a{
+#gitHubLink a, #navigation a{
   color: #ffffff;
+  text-decoration: none;
 }
-#gitHubLink a:hover{
+#gitHubLink a:hover, #navigation a:hover{
   color: #dadfea;
+}
+#courseInfoHere{
+  display: flex;
+  justify-content: space-between;
+}
+#infoCol{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.rowTitle{
+  font-weight: bold;
 }
