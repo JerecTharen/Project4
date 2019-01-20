@@ -22,7 +22,7 @@ export class PlayerService {
     let newPlayer: Player = {
       name: name,
       id: newID,
-      scores: ['--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--']
+      scores: ['--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--']
     };
     for(let i: number = 0; i < this.allPlayers.length; i++){
       if(this.allPlayers[i].name === newPlayer.name){
@@ -36,7 +36,7 @@ export class PlayerService {
     return this.allPlayers;
   }
 
-  addScore(holeNum: number, pID: number, score: number): void{
+  addScore(holeNum: number, pID: number, score: number): Player{
     // console.log(holeNum);
     // console.log(pID);
     // console.log(score);
@@ -45,6 +45,7 @@ export class PlayerService {
         // console.log(`found at ${i}`);
         this.allPlayers[i].scores[holeNum-1] = `${score}`;
         // console.log(`Score changed to: ${this.allPlayers[i].scores[holeNum-1]}`);
+        return this.allPlayers[i];
       }
     }
   }

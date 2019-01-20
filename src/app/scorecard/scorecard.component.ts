@@ -6,6 +6,7 @@ import {ScoringService} from "./scoring.service";
 import {PlayerService} from "./player/player.service";
 import {Player} from "./player/player";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {ScoreTotals} from "./score-totals";
 
 const testData: any[] = [
   {hole: 1, names: ['jacob', 'jerec', 'aralin'], scores: [1,2,3]},
@@ -69,9 +70,11 @@ export class ScorecardComponent implements OnInit {
   }
 
   readyInfo(tee: number): void{
+    console.log('Setting new info');
     this.courseYardage = [];
     this.courseHandicap = [];
     this.coursePAR = [];
+    // console.log(this.courseYardage);
     for(let i: number=0; i < 18; i++){
       // let holeNum: string = `hole${i+1}`;
       // console.log(holeNum);
@@ -104,8 +107,18 @@ export class ScorecardComponent implements OnInit {
     this.addScore();
   }
   addScore(): void{
-    this.playerService.addScore(this.currentHole, this.currentPlayer, this.newScore);
+    let scores: any[] = this.playerService.addScore(this.currentHole, this.currentPlayer, this.newScore).scores;
     // console.log(this.playerService.getPlayers());
+    this.scoringService.setScores(scores);
+    let result: ScoreTotals = this.scoringService.calcScores();
+    this.playerService.addScore(19, this.currentPlayer, result.outScore);
+    this.playerService.addScore(20, this.currentPlayer, result.inScore);
+    this.playerService.addScore(21, this.currentPlayer, result.totalScore);
+    let totalPar: number = 0;
+    for (let i: number = 0; i < 18; i++){
+      totalPar += this.courseInfo[i].teeBoxes[this.selectedTee].par;
+    }
+    this.scoringService.calcRelToPar(totalPar, scores);
   }
 
   DATASOURCE = testData;

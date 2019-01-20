@@ -3,7 +3,7 @@
     SCORES
   </mat-card-title>
   <div id="navigation">
-    <a routerLink="/course-select">Go back to course select</a>
+    <a routerLink="/course-select"><i class="fas fa-long-arrow-alt-left"></i> Go back to course select</a>
   </div>
   <mat-card-content>
     <div id="gitHubLink">
@@ -138,6 +138,10 @@
         <div class="holeNum">16</div>
         <div class="holeNum">17</div>
         <div class="holeNum">18</div>
+        <div class="holeNum">Out Scores</div>
+        <div class="holeNum">In Scores</div>
+        <div class="holeNum">Sub Total</div>
+        <div class="holeNum">Total</div>
       </div>
       <div class="infoCol playerScore" *ngFor="let player of allPlayers">
         <div class="rowTitle">{{ player.name }}</div>
