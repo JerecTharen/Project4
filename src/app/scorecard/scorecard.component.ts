@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ScoreAPIService} from "./score-api.service";
 import {StartServiceService} from "../start/start-service.service";
 import {ActivatedRoute} from "@angular/router";
+import {ScoringService} from "./scoring.service";
+import {PlayerService} from "./player/player.service";
+import {Player} from "./player/player";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 const testData: any[] = [
   {hole: 1, names: ['jacob', 'jerec', 'aralin'], scores: [1,2,3]},
@@ -16,6 +20,12 @@ const testData: any[] = [
   styleUrls: ['./scorecard.component.scss']
 })
 export class ScorecardComponent implements OnInit {
+  private newPlayerName: string;
+  private currentPlayer: number;
+  private currentHole: number;
+  private newScore: number;
+  private scoreForm: FormGroup;
+  private allPlayers: Player[];
   private courseInfo: any[];
   private selectedTee: number;
   private courseYardage: string[] = ['--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--'];
@@ -24,8 +34,17 @@ export class ScorecardComponent implements OnInit {
   constructor(
     private scoreAPI: ScoreAPIService,
     private startService: StartServiceService,
-    private route: ActivatedRoute
-  ) { }
+    private scoringService: ScoringService,
+    private playerService: PlayerService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {
+    this.scoreForm = this.fb.group({
+      'currentHole': [null],
+      'currentPlayer': [null],
+      'newScore': [null]
+    });
+  }
 
   ngOnInit() {
     this.scoreAPI.updateCourseID(this.startService.getCourse());
@@ -65,6 +84,28 @@ export class ScorecardComponent implements OnInit {
     for(let x: number = 0; x < 18; x++){
       this.coursePAR.push(this.courseInfo[x].teeBoxes[tee-1].par);
     }
+  }
+
+  addPlayerBTN(): void{
+    // console.log(this.newPlayerName);
+    this.addPlayer(this.newPlayerName);
+  }
+  addPlayer(name: string): void{
+    this.playerService.pushPlayer(name);
+    this.allPlayers = this.playerService.getPlayers();
+    // console.log(this.playerService.getPlayers());
+  }
+
+  addScoreSubmit(post):void{
+    this.currentHole = Number(post.currentHole);
+    this.currentPlayer = Number(post.currentPlayer);
+    this.newScore = post.newScore;
+    // console.log(`${this.currentHole}, ${this.currentPlayer}, ${this.newScore}`);
+    this.addScore();
+  }
+  addScore(): void{
+    this.playerService.addScore(this.currentHole, this.currentPlayer, this.newScore);
+    // console.log(this.playerService.getPlayers());
   }
 
   DATASOURCE = testData;

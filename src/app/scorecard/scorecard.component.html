@@ -19,7 +19,6 @@
         </mat-select>
       </form>
     </div>
-    <button mat-raised-button (click)="sayTeeType()">Tee Type</button>
   </mat-card-content>
 </mat-card>
 <mat-card>
@@ -71,6 +70,79 @@
 <mat-card>
   <mat-card-title>Hole Scores</mat-card-title>
   <mat-card-content>
-    
+    <div id="scoreControls">
+      <form>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Player Name" name="newPlayerName" [(ngModel)]="newPlayerName">
+        </mat-form-field>
+        <div>
+          <button mat-raised-button (click)="addPlayerBTN()">ADD PLAYER</button>
+        </div>
+      </form>
+      <form [formGroup]="scoreForm">
+        <mat-form-field>
+          <mat-select placeholder="Current Player" formControlName="currentPlayer" required>
+            <mat-option *ngFor="let player of allPlayers" value="{{ player.id }}">
+              {{ player.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Current Hole" formControlName="currentHole" required>
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+            <mat-option value="4">4</mat-option>
+            <mat-option value="5">5</mat-option>
+            <mat-option value="6">6</mat-option>
+            <mat-option value="7">7</mat-option>
+            <mat-option value="8">8</mat-option>
+            <mat-option value="9">9</mat-option>
+            <mat-option value="10">10</mat-option>
+            <mat-option value="11">11</mat-option>
+            <mat-option value="12">12</mat-option>
+            <mat-option value="13">13</mat-option>
+            <mat-option value="14">14</mat-option>
+            <mat-option value="15">15</mat-option>
+            <mat-option value="16">16</mat-option>
+            <mat-option value="17">17</mat-option>
+            <mat-option value="18">18</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="newScore" type="number" formControlName="newScore" placeholder="Score" required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button (click)="addScoreSubmit(scoreForm.value)">Add Score</button>
+        </div>
+      </form>
+    </div>
+    <div class="scoreTable">
+      <div class="holeNumbers infoCol">
+        <div class="rowTitle">Hole Number</div>
+        <div class="holeNum">1</div>
+        <div class="holeNum">2</div>
+        <div class="holeNum">3</div>
+        <div class="holeNum">4</div>
+        <div class="holeNum">5</div>
+        <div class="holeNum">6</div>
+        <div class="holeNum">7</div>
+        <div class="holeNum">8</div>
+        <div class="holeNum">9</div>
+        <div class="holeNum">10</div>
+        <div class="holeNum">11</div>
+        <div class="holeNum">12</div>
+        <div class="holeNum">13</div>
+        <div class="holeNum">14</div>
+        <div class="holeNum">15</div>
+        <div class="holeNum">16</div>
+        <div class="holeNum">17</div>
+        <div class="holeNum">18</div>
+      </div>
+      <div class="infoCol playerScore" *ngFor="let player of allPlayers">
+        <div class="rowTitle">{{ player.name }}</div>
+        <div *ngFor="let score of player.scores">{{ score }}</div>
+      </div>
+    </div>
   </mat-card-content>
 </mat-card>
