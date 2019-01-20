@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Player} from "./player/player";
-import {PlayerService} from "./player/player.service";
 import {ScoreTotals} from "./score-totals";
 
 @Injectable({
@@ -26,9 +24,9 @@ export class ScoringService {
       inScore += this.toScore[x];
     }
     totalScore = inScore + outScore;
-    console.log(outScore);
-    console.log(inScore);
-    console.log(totalScore);
+    // console.log(outScore);
+    // console.log(inScore);
+    // console.log(totalScore);
     this.toScore[18] = outScore;
     this.toScore[19] = inScore;
     this.toScore[20] = totalScore;

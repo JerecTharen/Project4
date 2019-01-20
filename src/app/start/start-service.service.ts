@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
 export class StartServiceService {
   private coursesURL: string = 'https://golf-courses-api.herokuapp.com/courses';
   private selectedCourse: string;
+  private backgroundPic: string;
   constructor(private http: HttpClient) { }
   getCourses(): Observable<Course[]>{
     // console.log(this.http.get<Course[]>(this.coursesURL));
@@ -19,5 +20,12 @@ export class StartServiceService {
   }
   getCourse(): string{
     return this.selectedCourse;
+  }
+  getBackground(): string{
+    console.log(this.backgroundPic);
+    return this.backgroundPic;
+  }
+  setBackground(pic: string): void{
+    this.backgroundPic = pic;
   }
 }

@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
+    this.email = this.loginForm.value.email;
+    this.password = this.loginForm.value.password;
     this.angularAuth.auth
       .signInWithEmailAndPassword(this.email, this.password)
       .then(user => {

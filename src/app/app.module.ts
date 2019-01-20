@@ -24,6 +24,7 @@ import {AuthService} from "./auth/auth.service";
 import { SignUpComponent } from './auth/signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AngularFireAuthModule} from "@angular/fire/auth";
+import {AngularFireDatabaseModule} from "@angular/fire/database";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {AngularFireAuthModule} from "@angular/fire/auth";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireModule,
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     FormsModule,
     ReactiveFormsModule
   ],

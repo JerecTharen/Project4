@@ -26,8 +26,14 @@ export class StartComponent implements OnInit {
     // console.log(this.courseList);
   }
   submitCourse(): void{
-    console.log(this.selectedCourse);
+    // console.log(this.selectedCourse);
     this.startService.updateCourse(this.selectedCourse);
+    // for(let i: number = 0; i < this.courseList.length; i++){
+    //   if (Number(this.selectedCourse) === this.courseList[i].id){
+    //     console.log(this.courseList);
+    //     this.startService.setBackground(this.courseList[i].image);
+    //   }
+    // }
     this.routing.navigate([`/scorecard/${this.selectedCourse}`]);
   }
 }

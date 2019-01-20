@@ -7,6 +7,7 @@ import {PlayerService} from "./player/player.service";
 import {Player} from "./player/player";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ScoreTotals} from "./score-totals";
+import {SaveService} from "./save/save.service";
 
 const testData: any[] = [
   {hole: 1, names: ['jacob', 'jerec', 'aralin'], scores: [1,2,3]},
@@ -21,6 +22,7 @@ const testData: any[] = [
   styleUrls: ['./scorecard.component.scss']
 })
 export class ScorecardComponent implements OnInit {
+  // private backgroundImage: string;
   private newPlayerName: string;
   private currentPlayer: number;
   private currentHole: number;
@@ -37,6 +39,7 @@ export class ScorecardComponent implements OnInit {
     private startService: StartServiceService,
     private scoringService: ScoringService,
     private playerService: PlayerService,
+    // private saveService: SaveService,
     private route: ActivatedRoute,
     private fb: FormBuilder
   ) {
@@ -48,29 +51,35 @@ export class ScorecardComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.backgroundImage = this.startService.getBackground();
+    // console.log(this.backgroundImage);
     this.scoreAPI.updateCourseID(this.startService.getCourse());
     this.getCourseInfo();
   }
 
   getCourseInfo(): void{
-    this.scoreAPI.getCourse().subscribe(info => {
+    // this.scoreAPI.getCourse().subscribe(info => {
+    //   this.courseInfo = info.data.holes;
+    //   // console.log(this.courseInfo);
+    // });
+    // if(this.courseInfo === undefined){
+    //   this.scoreAPI.getCourse(this.route.snapshot.paramMap.get('id')).subscribe(info => {
+    //     this.courseInfo = info.data.holes;
+    //     // console.log(this.courseInfo);
+    //   });
+    // }
+    this.scoreAPI.getCourse(this.route.snapshot.paramMap.get('id')).subscribe(info => {
       this.courseInfo = info.data.holes;
-      console.log(this.courseInfo);
+      // console.log(this.courseInfo);
     });
-    if(this.courseInfo === undefined){
-      this.scoreAPI.getCourse(this.route.snapshot.paramMap.get('id')).subscribe(info => {
-        this.courseInfo = info.data.holes;
-        console.log(this.courseInfo);
-      });
-    }
   }
 
-  sayTeeType(): void{
-    console.log(this.selectedTee);
-  }
+  // sayTeeType(): void{
+  //   console.log(this.selectedTee);
+  // }
 
   readyInfo(tee: number): void{
-    console.log('Setting new info');
+    // console.log('Setting new info');
     this.courseYardage = [];
     this.courseHandicap = [];
     this.coursePAR = [];
@@ -115,11 +124,16 @@ export class ScorecardComponent implements OnInit {
     this.playerService.addScore(20, this.currentPlayer, result.inScore);
     this.playerService.addScore(21, this.currentPlayer, result.totalScore);
     let totalPar: number = 0;
+    // console.log(this.selectedTee);
     for (let i: number = 0; i < 18; i++){
+      // console.log(this.courseInfo[i].teeBoxes[this.selectedTee].par);
       totalPar += this.courseInfo[i].teeBoxes[this.selectedTee].par;
     }
     this.scoringService.calcRelToPar(totalPar, scores);
   }
+  // getData(){
+  //   console.log(this.saveService.getData());
+  // }
 
   DATASOURCE = testData;
 
