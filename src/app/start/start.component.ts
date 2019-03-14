@@ -19,7 +19,7 @@ export class StartComponent implements OnInit {
 
   ngOnInit() {
     this.getCourses();
-    // console.log(this.courseList);
+    console.log(this.courseList);
   }
   getCourses(): void{
     this.startService.getCourses().subscribe(courseList => this.courseList = courseList);

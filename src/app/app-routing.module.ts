@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   {path: 'course-select', component: StartComponent},
   {path: 'signup', component: SignUpComponent},
   {path: 'scorecard/:id', component: ScorecardComponent},
-  {path: '', component: LoginComponent}
+  {path: '', component: SignUpComponent}
 ];
 
 @NgModule({
